@@ -1,7 +1,6 @@
 # Setup
 title:        Concurrent Thoughts
-tagline:      A blog to collect my thoughts on various topics
-baseurl:      ""
+description:  A blog to collect my thoughts on various topics
 theme:        jekyll-theme-cayman
 
 # About/contact
