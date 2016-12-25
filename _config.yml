@@ -1,1 +1,10 @@
-theme: jekyll-theme-cayman
+# Setup
+title:        Concurrent Thoughts
+tagline:      A blog to collect my thoughts on various topics
+baseurl:      ""
+theme:        jekyll-theme-cayman
+
+# About/contact
+author:
+  name:       Oliver Grieb
+  url:        https://github.com/ogrieb 
