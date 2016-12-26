@@ -7,9 +7,7 @@ Welcome to my very first post on my freshly launched blog. Yay!
 
 Having never run a website before - and last having written some html back in school some 15+ years ago - I am a bit proud of myself. Getting here was a nice little learning adventure over the last two days.
 
-So, finally having decided two days ago to actually _do_ it, i.e. to set up this site, I just started at the [GitHub Pages](https://pages.github.com/) site, it made it look easy enough.
-
-Having setup my account, a repository and briefly familiarized myself with Git(Hub) I quickly ended up with a 'Hello World' displayed on my site... but, that wasn't a blog yet.
+So, two days ago I finally decided to set up this site. I just started at the [GitHub Pages](https://pages.github.com/) site, which made it look easy enough. I setup my account, a repository, briefly familiarized myself with Git(Hub) and I quickly ended up with a 'Hello World' displayed on my site... but, that wasn't a blog yet.
 
 Then, I started reading over all the referenced pages and also started crawling over the [Jekyll](https://jekyllrb.com/) site itself. Being a bit overwhelmed at all that Jekyll seemed to encompass, I was then quite happy to find them referencing [Jonathan McGlone's marvelous guide](http://jmcglone.com/guides/github-pages/) to GitHub Pages.
 
