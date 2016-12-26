@@ -13,16 +13,16 @@ Then, I started reading over all the referenced pages and also started crawling 
 
 His guide really helped me to get a basic undertanding of how Git, GitHub Pages, html content, content styles (CSS), Jekyll generated content and Markdown come together. Thus, I finally ended up with something that actually resembled a blog: his exemplarily content that I started to play around with and to understand.
 
-Still, that wasn't my blog yet. His exemplarilry included content styles weren't that pretty and I had already seen some of the GitHub Pages' respectively Jekyll's template styles. I wanted it to look more like one of those, the [Cayman theme](https://github.com/pages-themes/cayman) in particular had taken my fancy.
+Still, that wasn't _my_ blog yet. His exemplarily included content styles weren't that pretty and I had already seen some of the much nicer GitHub Pages' - respectively Jekyll's - template styles. The [Cayman theme](https://github.com/pages-themes/cayman) in particular had taken my fancy.
 
 Here is where I got a bit confused. I had so far never done anything with content styles, so I didn't really know how to get McGlone's marvelous blog structure styled differently. I understood, that he included the CSS files explicitly in the repository.
 
-When I generated my repository freshly with the Pages' provided Cayman theme, though, there was no explicit CSS content... only a corresponding entry in the `_config.yml`:
+When I generated my repository freshly with the GitHub Pages' provided Cayman theme, though, there was no explicit CSS content... only a corresponding entry in the `_config.yml`:
 
 ```
 theme: jekyll-theme-cayman
 ```
 
-Besides that file, there was only the exemplary `index.html` from the theme. The CSS content seemed to have become included implicitly with the Pages' provided themes.
+Besides that file, there was only an exemplary `index.html`. The CSS content seemed to have become included implicitly with the Pages' provided themes.
 
 ToBeContinued
