@@ -23,6 +23,6 @@ When I generated my repository freshly with the GitHub Pages' provided Cayman th
 theme: jekyll-theme-cayman
 ```
 
-Besides that file, there was only an exemplary `index.html`. The CSS content seemed to have become included implicitly with the Pages' provided themes.
+Besides that file, there was only the theme's showcasing `index.md`. The html as well as the CSS content seemed to have become included implicitly. The `index.md` only included markdown content for the page's body. So I was a bit lost, how to costumize the page's layout itself? The pages title in the header for example was shown as 'ogrieb.github.io' and I had no idea where that value came from. The guide I looked at before had the page-header explicitly set in the `_layouts` folder.
 
 ToBeContinued
