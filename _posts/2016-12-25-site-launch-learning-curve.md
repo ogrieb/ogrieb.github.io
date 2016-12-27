@@ -29,5 +29,6 @@ So I was a bit lost, how to costumize the page's layout itself? The page's title
 
 Reading the Cayman theme's [README](https://github.com/pages-themes/cayman/blob/master/README.md) (again) then cleared up those questions - and here we are!
 
-Cheers
-Oliver Grieb
+Cheers  
+Oliver Grieb  
+December 25th, 2016
