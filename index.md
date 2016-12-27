@@ -1,5 +1,5 @@
 ---
-layout: main
+layout: default
 ---
 
 ## Welcome to my blog
