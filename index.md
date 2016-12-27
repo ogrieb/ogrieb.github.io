@@ -11,5 +11,7 @@ The general idea will be to note down an interesting thought in a blog post so a
 ## Posts
 
 {% for post in site.posts %}
-  * {{ post.date | date_to_string }} » [{{ post.title }}]({{ post.url }})
+
+  * {{ post.date | date_to_string }} » [ {{ post.title }} ]( {{ post.url }} )
+  
 {% endfor %}
