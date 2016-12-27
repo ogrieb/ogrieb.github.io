@@ -27,7 +27,7 @@ Besides that file, there was only the theme's showcasing `index.md`, which only 
 
 So I was a bit lost, how to costumize the page's layout itself? The page's title in the header for example was shown as 'ogrieb.github.io' and I had no idea where that parameter was set. The guide had the page-header layout - and with that, all included 'liquid tags' as I would learn to call them - explicitly set in the now abscent `_layouts` folder.
 
-Reading the Cayman theme's [README](https://github.com/pages-themes/cayman/blob/master/README.md) (again) then cleared up those questions - and here we are!
+Reading the Cayman theme's [README](https://github.com/pages-themes/cayman/blob/master/README.md) (again - notice the part about costumizing...) then cleared up those questions. And here we are!
 
 Cheers  
 Oliver Grieb  
