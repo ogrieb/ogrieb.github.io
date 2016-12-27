@@ -23,6 +23,11 @@ When I generated my repository freshly with the GitHub Pages' provided Cayman th
 theme: jekyll-theme-cayman
 ```
 
-Besides that file, there was only the theme's showcasing `index.md`. The html as well as the CSS content seemed to have become included implicitly. The `index.md` only included markdown content for the page's body. So I was a bit lost, how to costumize the page's layout itself? The pages title in the header for example was shown as 'ogrieb.github.io' and I had no idea where that value came from. The guide I looked at before had the page-header explicitly set in the `_layouts` folder.
+Besides that file, there was only the theme's showcasing `index.md`, which only included markdown content for the page's body. The layouting html as well as the CSS content seemed to have become included implicitly, i.e. hidden.
 
-ToBeContinued
+So I was a bit lost, how to costumize the page's layout itself? The page's title in the header for example was shown as 'ogrieb.github.io' and I had no idea where that parameter was set. The guide had the page-header layout - and with that, all included 'liquid tags' as I would learn to call them - explicitly set in the now abscent `_layouts` folder.
+
+Reading the Cayman theme's [README](https://github.com/pages-themes/cayman/blob/master/README.md) (again) then cleared up those questions - and here we are!
+
+Cheers
+Oliver Grieb
