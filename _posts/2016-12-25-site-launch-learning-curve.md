@@ -1,6 +1,8 @@
 ---
 layout: default
 title: "Site Launch, Learning Curve"
+excerpt: "Welcome, this is what I had to learn to launch this site."
+published: true
 ---
 
 Welcome to my very first post on my freshly launched blog. Yay!
