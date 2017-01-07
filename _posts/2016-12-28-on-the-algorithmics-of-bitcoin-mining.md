@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "On The Algorithmics of Bitcoin Mining"
+excerpt: "What algorithm do bitcoin miners implement?"
 published: true
 ---
 
