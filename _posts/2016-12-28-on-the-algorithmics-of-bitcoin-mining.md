@@ -6,6 +6,7 @@ published: true
 ---
 
 # On The Algorithmics of Bitcoin Mining - Part 1
+
 ## The Distributed Mining Service
 
 From the [Bitcoin](https://bitcoin.org) [network's](https://en.bitcoin.it/wiki/Network) perspective, all miners provide a service for which they are sent a similar mathematical _problem_ to solve. This problem is derived from the current state of the network's [blockchain](https://en.bitcoin.it/wiki/Block_chain), as well as all [transactions](https://en.bitcoin.it/wiki/Transaction) published by peers since the last block was linked into the chain. Now, the first miner to find _and publish_ a peer-accepted solution for the current problem, basically, produces the newest block.
