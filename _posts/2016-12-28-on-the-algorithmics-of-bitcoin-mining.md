@@ -19,7 +19,7 @@ Miners don't solve the problem of finding the next block hash out of selfishness
 
 So, although, the list of peer-transactions to be included in the next block is distributed to all, each miner will prepend his own coinbase transaction to this list.  This makes mining each block a competition to be the first to publish an acceptable block header, and the winner takes it _all_.
 
-## Serialized Block Header and Block Hash Computation
+## Block Header Serializing and Block Hash Computation
 
 A [block](https://en.bitcoin.it/wiki/Block_hashing_algorithm) [header](https://bitcoin.org/en/developer-reference#block-headers) is serialized in an 80 byte octet string, containing the concatenated entries:
 
@@ -32,8 +32,54 @@ A [block](https://en.bitcoin.it/wiki/Block_hashing_algorithm) [header](https://b
 
 The corresponding block hash is simply defined as a double [SHA-256](https://en.wikipedia.org/wiki/SHA-2) [hash](https://dx.doi.org/10.6028/NIST.FIPS.180-4) over this string.
 
-```
-block_hash = sha256(sha256(block_header))
+## Example
+
+ Let us demonstrate the block hash computation by a real world example. [Block chain browsers](https://en.bitcoin.it/wiki/Block_chain_browser) like the [Blockexplorer](https://blockexplorer.com) website lets us browse the actual bitcoin blockchain. The main site always shows the most recent block, right now, this is block [#447569](https://blockexplorer.com/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac).
+
+ The values for this site are presented in an easily readable format, some abbreviated. The raw bytes we want to compute with can better be accessed by their web [API](https://blockexplorer.com/api-ref). [Here is](https://blockexplorer.com/api/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d) the very same block, just click it, your browser will show the returned [JSON](https://en.wikipedia.org/wiki/JSON) struct as text. A _lot_ of text, the list of transactions `"tx":["024b...6e51"]` is quite huge and makes up most of the data presented. Structuring the wall of text a bit, and shorting the `"tx"` array, we get:
+
+ ```json
+{
+    "hash":"0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac",
+    "size":999125,
+    "height":447569,
+    "version":536870912,
+    "merkleroot":"f15ffc938c16171d662003e712eaf7aabddb25a1a6e55b7d4e5f1adb0e844739",
+    "tx":["024b...6e51"],
+    "time":1484093953,
+    "nonce":1832080224,
+    "bits":"18034379",
+    "difficulty":336899932795.80774,
+    "chainwork":"00000000000000000000000000000000000000000037b812a69b538795d4f2e6",
+    "confirmations":2,
+    "previousblockhash":"0000000000000000001baf6764a1471574b36e52debe66be0bb5fd593e889dbb",
+    "nextblockhash":"000000000000000000cda699b7856bac05591123eb6ad52896d50c5a22077128",
+    "reward":12.5,
+    "isMainChain":true,
+    "poolInfo":{}
+}
+ ```
+This gives us most of the strings we are looking for, most of them as hex strings.
+
+- The very first `hash` is actually the block hash we are trying to compute by ourselves.
+- 'size' is the total block size in bytes.
+
+The Python script below demonstrates this for the actual bitcoin block [125552](http://blockexplorer.com/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d).
+
+```python
+import hashlib
+
+version = bytes.fromhex("01000000")
+prevblockhash = bytes.fromhex("81cd02ab7e569e8bcd9317e2fe99f2de44d49ab2b8851ba4a308000000000000")
+merkleroot = bytes.fromhex("e320b6c2fffc8d750423db8b1eb942ae710e951ed797f7affc8892b0f1fc122b")
+time = bytes.fromhex("c7f5d74d")
+nbits = bytes.fromhex("f2b9441a")
+nonce = bytes.fromhex("42a14695")
+
+header = version + prevblockhash + merkleroot + time + nbits + nonce
+blockhash = hashlib.sha256(hashlib.sha256(header).digest()).digest()
+
+print(blockhash)
 ```
 
 
