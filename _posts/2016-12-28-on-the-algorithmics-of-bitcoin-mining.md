@@ -38,20 +38,20 @@ The corresponding block hash is simply defined as a double [SHA-256](https://en.
 
  The values for this site are presented in an easily readable format, some abbreviated. The raw bytes we want to compute with can better be accessed by their web [API](https://blockexplorer.com/api-ref). [Here is](https://blockexplorer.com/api/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d) the very same block, just click it, your browser will show the returned [JSON](https://en.wikipedia.org/wiki/JSON) struct as text. A _lot_ of text, the list of transactions `"tx":["024b...6e51"]` is quite huge and makes up most of the data presented. Structuring the wall of text a bit, and shorting the `"tx"` array, we get:
 
-```json
+```javascript
 {
-  "pi": 3.141,
-  "happy": true,
-  "name": "Niels",
-  "nothing": null,
-  "answer": {
-  "everything": 42
-  },
-  "list": [1, 0, 2],
-  "object": {
-   "currency": "USD",
-   "value": 42.99
-  }
+    "pi": 3.141,
+    "happy": true,
+    "name": "Niels",
+    "nothing": null,
+    "answer": {
+    "everything": 42
+    },
+    "list": [1, 0, 2],
+    "object": {
+    "currency": "USD",
+    "value": 42.99
+    }
 }
 ```
 
