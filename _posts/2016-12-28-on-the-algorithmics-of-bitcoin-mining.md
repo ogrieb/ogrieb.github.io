@@ -36,7 +36,7 @@ The corresponding block hash is simply defined as a double [SHA-256](https://en.
 
  Let us demonstrate the block hash computation by a real world example. [Block chain browsers](https://en.bitcoin.it/wiki/Block_chain_browser) like the [Blockexplorer](https://blockexplorer.com) website lets us browse the actual bitcoin blockchain. The main site always shows the most recent block, right now, this is block [#447569](https://blockexplorer.com/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac).
 
- The values for this site are presented in an easily readable format, some abbreviated. The raw bytes we want to compute with can better be accessed by their web [API](https://blockexplorer.com/api-ref). [Here is](https://blockexplorer.com/api/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d) the very same block, just click it, your browser will show the returned [JSON](https://en.wikipedia.org/wiki/JSON) struct as text. A _lot_ of text, the list of transactions `"tx":["024b...6e51"]` is quite huge and makes up most of the data presented. Structuring the wall of text a bit, and shorting the `"tx"` array, we get:
+ The values for this site are presented in an easily readable format, some abbreviated. The raw bytes we want to compute with can better be accessed by their web [API](https://blockexplorer.com/api-ref). [Here](https://blockexplorer.com/api/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d) we can retrieve the very same block via their API. Just click on it, your browser will show the returned [JSON](https://en.wikipedia.org/wiki/JSON) struct as text. A _lot_ of text, the list of transactions `"tx":["024b...6e51"]` has 693 entries and thus makes up most of the data presented. When shorting the `"tx"` array and structuring the wall of text, we get:
 
 ```json
 {
@@ -60,10 +60,13 @@ The corresponding block hash is simply defined as a double [SHA-256](https://en.
 }
 ```
 
-This gives us most of the strings we are looking for, most of them as hex strings.
+This gives us all of the header strings we are looking for, most of them as hex strings. All of these values are denoted in [big endian](https://en.wikipedia.org/wiki/Endianness#Big-endian). The endianness is easy to spot for block hashes as big endian numbers will have leading zeros, whereas little endian will have them trailing.
 
-- The very first `hash` is actually the block hash we are trying to compute by ourselves.
-- 'size' is the total block size in bytes.
+The struct holds some elements, which are not actually part of the header or block. These are some statistics the API provides. Right now we only want to compute the hash, so we can ignore everything which is not a header value.
+
+- `hash` is actually the block hash we are trying to compute by ourselves. So this gives us a reference.
+- `size` is the total block size in bytes.
+- `height` is the height of the block in the chain, i.e. the .
 
 The Python script below demonstrates this for the actual bitcoin block [125552](http://blockexplorer.com/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d).
 
