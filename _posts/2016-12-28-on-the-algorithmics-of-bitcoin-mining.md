@@ -40,7 +40,7 @@ The corresponding block hash is simply defined as a double [SHA-256](https://en.
 
  ```
     "hash":"0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac",
-    "size":999125
+    "size":9991253445674657
 ```
 
 This gives us most of the strings we are looking for, most of them as hex strings.
