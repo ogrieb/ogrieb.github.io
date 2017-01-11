@@ -41,22 +41,7 @@ The corresponding block hash is simply defined as a double [SHA-256](https://en.
  ```json
 {
     "hash":"0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac",
-    "size":999125,
-    "height":447569,
-    "version":536870912,
-    "merkleroot":"f15ffc938c16171d662003e712eaf7aabddb25a1a6e55b7d4e5f1adb0e844739",
-    "tx":["024b...6e51"],
-    "time":1484093953,
-    "nonce":1832080224,
-    "bits":"18034379",
-    "difficulty":336899932795.80774,
-    "chainwork":"00000000000000000000000000000000000000000037b812a69b538795d4f2e6",
-    "confirmations":2,
-    "previousblockhash":"0000000000000000001baf6764a1471574b36e52debe66be0bb5fd593e889dbb",
-    "nextblockhash":"000000000000000000cda699b7856bac05591123eb6ad52896d50c5a22077128",
-    "reward":12.5,
-    "isMainChain":true,
-    "poolInfo":{}
+    "size":999125
 }
  ```
 
