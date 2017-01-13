@@ -1,9 +1,9 @@
 # Setup
-title:        Concurrent Thoughts
-description:  A blog to collect my thoughts on various topics
-theme:        jekyll-theme-cayman
+title: Concurrent Thoughts
+description: A blog to collect my thoughts on various topics
+theme: jekyll-theme-cayman
 
 # About/contact
 author:
-  name:       Oliver Grieb
-  url:        https://github.com/ogrieb 
+    name: Oliver Grieb
+    url: https://github.com/ogrieb
