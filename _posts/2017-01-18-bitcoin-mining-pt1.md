@@ -1,11 +1,22 @@
 ---
 layout: default
-title: "On The Algorithmics of Bitcoin Mining - Part 1"
-excerpt: "What algorithm do bitcoin miners implement?"
+title: "Bitcoin Mining - Part 1"
+excerpt: "Recomputing the Bitcoin Block Hash #447569"
 published: true
 ---
 
-# On The Algorithmics of Bitcoin Mining - Part 1
+# Recomputing the Bitcoin Block Hash #447569
+
+To get a better technical understanding of [bitcoin](https://bitcoin.org/en/developer-guide#mining) [mining](https://en.bitcoin.it/wiki/Mining) I started reading into the topics in the respective [developer guide](https://bitcoin.org/en/developer-guide), [developer reference](https://bitcoin.org/en/developer-reference) and [wiki](https://en.bitcoin.it/wiki). My main objective was to learn what algorithm [miners](https://en.bitcoin.it/wiki/Mining), in software or hardware, actually implement. I expected an explanation along three points:
+
+1. input to mining implementation,
+2. computations on input,
+3. returned output.
+
+The most interesting technical detail I found in the wiki article about the [block hashing algorithm](https://en.bitcoin.it/wiki/Block_hashing_algorithm). While it doesn't explain the full algorithm a miner implements very well (in my opinion), it does give a good explanation about their core operation: computing the block hash and comparing the resulting digest against a [target](https://en.bitcoin.it/wiki/Target).
+
+
+
 
 ## The Distributed Mining Service
 
