@@ -15,7 +15,7 @@ The two examples I linked above used the html `img` [tag](https://www.w3.org/wik
 
 From these three concepts I derived my own image respectively figure syntax:
 
-```html
+```markdown
 <figure>
     {% comment %} Link on image only included when set, as the browser
     would still attempt a mouse-over. {% endcomment %}
