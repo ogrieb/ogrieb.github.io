@@ -23,20 +23,20 @@ From these three concepts I derived my own image respectively figure syntax:
 ```html
 <figure>
     {% raw %}{% comment %}{% endraw %} Link on image only included when set, as the browser
-    would still attempt a mouse-over. \{% endcomment %\}
-    {% if include.url %}
-        <a href="{{ include.url }}">
-    {% endif %}
+    would still attempt a mouse-over. {% raw %}{% endcomment %}{% endraw %}
+    {% raw %}{% if include.url %}{% endraw %}
+        <a href="{% raw %}{{ include.url }}{% endraw %}">
+    {% raw %}{% endif %}{% endraw %}
             {% comment %} Alt-text is defaulted to image name. {% endcomment %}
-            <img src="{{ site.url }}/assets/{{ include.img }}"
-                alt="{{ include.alt | default: include.img }}"
-                width="{{ include.width }}"
-                height="{{ include.height }}"/>
+            <img src="{% raw %}{{ site.url }}/assets/{{ include.img }}{% endraw %}"
+                alt="{% raw %}{{ include.alt | default: include.img }}{% endraw %}"
+                width="{% raw %}{{ include.width }}{% endraw %}"
+                height="{% raw %}{{ include.height }}{% endraw %}"/>
     {% if include.url %}
         </a>
     {% endif %}
-    {% comment %} Caption can be Markdown formatted. {% endcomment %}
-    <figcaption>{{ include.cap | markdownify }}</figcaption>
+    {% raw %}{% comment %} Caption can be Markdown formatted. {% endcomment %}{% endraw %}
+    <figcaption>{% raw %}{{ include.cap | markdownify }}{% endraw %}</figcaption>
 </figure>
 ```
 
