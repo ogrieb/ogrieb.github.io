@@ -17,8 +17,8 @@ From these three concepts I derived my own image respectively figure syntax:
 
 ```html
     <figure>
-        \{% comment %} Link on image only included when set, as the browser
-        would still attempt a mouse-over. {% endcomment %}
+        \{% comment %\} Link on image only included when set, as the browser
+        would still attempt a mouse-over. \{% endcomment %\}
         {% if include.url %}
             <a href="{{ include.url }}">
         {% endif %}
