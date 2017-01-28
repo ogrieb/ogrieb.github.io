@@ -30,7 +30,7 @@ From these three concepts I derived my own image respectively figure syntax:
         {% if include.url %}
             </a>
         {% endif %}
-        {% comment %} Caption can be Markdown formatted. {% endcomment %}
+        <code>{% comment %} Caption can be Markdown formatted. {% endcomment %}</code>
         <figcaption>{{ include.cap | markdownify }}</figcaption>
     </figure>
 ```
