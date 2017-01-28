@@ -15,6 +15,7 @@ The two examples I linked above used the html `img` [tag](https://www.w3.org/wik
 
 {% raw %}
   In Handlebars, {{ this }} will be HTML-escaped, but {{{ that }}} will not.
+  {{ site.url }}/assets/{{ include.img }}
 {% endraw %}
 
 From these three concepts I derived my own image respectively figure syntax:
