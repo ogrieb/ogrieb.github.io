@@ -38,4 +38,4 @@ From these three concepts I derived my own parameterized image, respectively fig
 {% endraw %}
 
 Oliver Grieb  
-January 23rd, 2017
+January 28th, 2017
