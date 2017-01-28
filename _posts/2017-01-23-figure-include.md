@@ -13,6 +13,10 @@ Googling for it, I found some [good](https://superdevresources.com/image-caption
 
 The two examples I linked above used the html `img` [tag](https://www.w3.org/wiki/HTML/Elements/img) with an underlying caption, where they style the actual caption with CSS. I found the more abstract html `figure` [together](https://www.w3.org/wiki/HTML/Elements/figure) with the `figcaption` [tags](https://www.w3.org/wiki/HTML/Elements/figcaption) more straightforward to use, as this combination doesn't require CSS. After I build my own first version, I found another image syntax with complex formatting in [Jekyll's own documentation](http://jekyllrb.com/docs/includes/#passing-parameters-to-includes).
 
+{% raw %}
+  In Handlebars, {{ this }} will be HTML-escaped, but {{{ that }}} will not.
+{% endraw %}
+
 From these three concepts I derived my own image respectively figure syntax:
 
 ```html
