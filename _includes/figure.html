@@ -1,8 +1,9 @@
 <figure>
     <a href="{{ include.url }}">
-    <img src="{{ site.url }}/assets/{{ include.img }}"
-        alt="{{ include.alt | default: include.img }}"
-        width="{{ include.width }}"
-        height="{{ include.height }}"/>
+        <img src="{{ site.url }}/assets/{{ include.img }}"
+            alt="{{ include.alt | default: include.img }}"
+            width="{{ include.width }}"
+            height="{{ include.height }}"/>
+    </a>
     <figcaption>{{ include.cap | markdownify }}</figcaption>
 </figure>
