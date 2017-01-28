@@ -13,20 +13,15 @@ Googling for it, I found some [good](https://superdevresources.com/image-caption
 
 The two examples I linked above used the html `img` [tag](https://www.w3.org/wiki/HTML/Elements/img) with an underlying caption, where they style the actual caption with CSS. I found the more abstract html `figure` [together](https://www.w3.org/wiki/HTML/Elements/figure) with the `figcaption` [tags](https://www.w3.org/wiki/HTML/Elements/figcaption) more straightforward to use, as this combination doesn't require CSS. After I build my own first version, I found another image syntax with complex formatting in [Jekyll's own documentation](http://jekyllrb.com/docs/includes/#passing-parameters-to-includes).
 
-{% raw %}
-  In Handlebars, {{ this }} will be HTML-escaped, but {{{ that }}} will not.
-  {{ site.url }}/assets/{{ include.img }}
-{% endraw %}
-
 From these three concepts I derived my own image respectively figure syntax:
 
 ```html
 <figure>
-    {% raw %}{% comment %}{% endraw %} Link on image only included when set, as the browser
-    would still attempt a mouse-over. {% raw %}{% endcomment %}{% endraw %}
-    {% raw %}{% if include.url %}{% endraw %}
-        <a href="{% raw %}{{ include.url }}{% endraw %}">
-    {% raw %}{% endif %}{% endraw %}
+    {% raw %}{% comment %} Link on image only included when set, as the browser
+    would still attempt a mouse-over. {% endcomment %}{% endraw %}
+    {% raw %}{% if include.url %}
+        <a href="{{ include.url }}">
+    {% endif %}{% endraw %}
             {% comment %} Alt-text is defaulted to image name. {% endcomment %}
             <img src="{% raw %}{{ site.url }}/assets/{{ include.img }}{% endraw %}"
                 alt="{% raw %}{{ include.alt | default: include.img }}{% endraw %}"
