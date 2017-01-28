@@ -15,9 +15,10 @@ The two examples I linked above used the html `img` [tag](https://www.w3.org/wik
 
 From these three concepts I derived my own image respectively figure syntax:
 
+{% raw %}
 ```html
 <figure>
-    {% raw %}{% comment %} Link on image only included when set, as the browser
+    {% comment %} Link on image only included when set, as the browser
     would still attempt a mouse-over. {% endcomment %}
     {% if include.url %}
         <a href="{{ include.url }}">
@@ -31,9 +32,10 @@ From these three concepts I derived my own image respectively figure syntax:
         </a>
     {% endif %}
     {% comment %} Caption can be Markdown formatted. {% endcomment %}
-    <figcaption>{{ include.cap | markdownify }}</figcaption>{% endraw %}
+    <figcaption>{{ include.cap | markdownify }}</figcaption>
 </figure>
 ```
+{% endraw %}
 
 Observe, that as final touches the alt-text is defaulted to the image name and the caption is filtered with `markdownify`, so that it is expected as a Markdown formatted string.
 
