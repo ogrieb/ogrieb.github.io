@@ -8,10 +8,9 @@ published: true
 # The Bitcoin Block Hashing Algorithm
 
 {% include figure.html img="2017-01-22-blockchain-overview.svg"
-    cap="Figure 1. [_Simplified Bitcoin Block Chain_][1] by unknown, licensed under the [MIT license][2]. _Developer Guide_, Bitcoin Project. Accessed 22 January 2017." %}
-
-[1]: https://bitcoin.org/en/developer-guide#block-chain
-[2]: http://opensource.org/licenses/mit-license.php
+    cap="Figure 1. [_Simplified Bitcoin Block Chain_][1] by unknown, licensed under the [MIT license][2]. _Developer Guide_, Bitcoin Project. Accessed 22 January 2017."
+    [1]: https://bitcoin.org/en/developer-guide#block-chain
+    [2]: http://opensource.org/licenses/mit-license.php %}
 
 The block hash defines the chain links among the block chain, as every block contains a hash of the previous block. For more contextual information I recommend the wiki's [block chain article](https://en.bitcoin.it/wiki/Block_chain) and the developer guide's [block chain section](https://bitcoin.org/en/developer-guide#block-chain).
 
