@@ -17,7 +17,11 @@ In this post, I just want to consider the block hashing _algorithm_ itself. As o
 ```python
 from hashlib import sha256
 
-def blockhash(header):
+def blockhash(header: bytes) -> bytes:
+    """Block hash over serialized header.
+
+    Computes a double SHA-256 hash over the serialized block 'header', expected
+    in little endian."""
     hash = sha256(header).digest()
     hash = sha256(hash).digest()
     return hash
