@@ -31,11 +31,15 @@ We can test the above function against any header in the actual chain. The respe
 
 ![2016-12-28-bitexpblock447569.jpg]({{ site.url }}/assets/2016-12-28-bitexpblock447569.jpg)
 
-This block can also be accessed in slightly more raw form by calling their [REST API](https://blockexplorer.com/api-ref) with the block hash as
+This block can also be accessed in slightly more raw form by calling their [REST API](https://blockexplorer.com/api-ref) as:
 
 ```url
 https://blockexplorer.com/api/block/[:hash]
+```
 
+With corresponding block hash:
+
+```url
 https://blockexplorer.com/api/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6acj
 ```
 
