@@ -31,7 +31,15 @@ We can test the above function against any header in the actual chain. The respe
 
 ![2016-12-28-bitexpblock447569.jpg]({{ site.url }}/assets/2016-12-28-bitexpblock447569.jpg)
 
-This block can also be accessed in slightly more raw form by their [REST API](https://blockexplorer.com/api-ref), under the link <https://blockexplorer.com/api/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac>. The returned [JSON](https://en.wikipedia.org/wiki/JSON) struct contains a _lot_ of text, the list of transactions `"tx":["024b...6e51"]` has 693 entries and thus makes up most of the data presented. By shorting the `"tx"` array and structuring a bit, we get:
+This block can also be accessed in slightly more raw form by calling their [REST API](https://blockexplorer.com/api-ref) with the block hash as
+
+```url
+https://blockexplorer.com/api/block/[:hash]
+
+https://blockexplorer.com/api/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6acj
+```
+
+The returned [JSON](https://en.wikipedia.org/wiki/JSON) struct contains a _lot_ of text, the list of transactions `"tx":["024b...6e51"]` has 693 entries and thus makes up most of the data presented. By shorting the `"tx"` array and structuring a bit, we get:
 
 ```json
 {
