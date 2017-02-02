@@ -31,18 +31,7 @@ We can test the above function against any header in the actual chain. The respe
 
 ![2016-12-28-bitexpblock447569.jpg]({{ site.url }}/assets/2016-12-28-bitexpblock447569.jpg)
 
-These values we need to serialize. A block [header](https://bitcoin.org/en/developer-reference#block-headers) is serialized in an 80 byte string, containing the concatenated entries:
-
-- [version](https://bitcoin.org/en/developer-reference#block-versions) number
-- [previous block header's hash](https://bitcoin.org/en/developer-reference#term-previous-block-header-hash)
-- [merkle root hash](https://bitcoin.org/en/glossary/merkle-root)
-- current [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time)
-- [target](https://en.bitcoin.it/wiki/Target) [nBits](https://bitcoin.org/en/developer-reference#target-nbits)
-- nonce, arbitrarily set by the miner
-
-These values are presented in easily readable formats, i.e. mostly as base-10 or hex digits.
-
-The raw bytes we want to compute with can better be accessed by their web [API](https://blockexplorer.com/api-ref). [Here](https://blockexplorer.com/api/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d) we can retrieve the very same block via their API. Just click on it, your browser will show the returned [JSON](https://en.wikipedia.org/wiki/JSON) struct as text. A _lot_ of text, the list of transactions `"tx":["024b...6e51"]` has 693 entries and thus makes up most of the data presented. When shorting the `"tx"` array and structuring the wall of text, we get:
+This block can also be accessed in slightly more raw form by their [REST API](https://blockexplorer.com/api-ref), under the link <https://blockexplorer.com/api/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac>. The returned [JSON](https://en.wikipedia.org/wiki/JSON) struct contains a _lot_ of text, the list of transactions `"tx":["024b...6e51"]` has 693 entries and thus makes up most of the data presented. By shorting the `"tx"` array and structuring a bit, we get:
 
 ```json
 {
@@ -65,3 +54,16 @@ The raw bytes we want to compute with can better be accessed by their web [API](
    "poolInfo":{}
 }
 ```
+
+These values we need to serialize. A block [header](https://bitcoin.org/en/developer-reference#block-headers) is serialized in an 80 byte string, containing the concatenated entries:
+
+- [version](https://bitcoin.org/en/developer-reference#block-versions) number
+- [previous block header's hash](https://bitcoin.org/en/developer-reference#term-previous-block-header-hash)
+- [merkle root hash](https://bitcoin.org/en/glossary/merkle-root)
+- current [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time)
+- [target](https://en.bitcoin.it/wiki/Target) [nBits](https://bitcoin.org/en/developer-reference#target-nbits)
+- nonce, arbitrarily set by the miner
+
+These values are presented in easily readable formats, i.e. mostly as base-10 or hex digits.
+
+The raw bytes we want to compute with can better be accessed by their web [API](https://blockexplorer.com/api-ref). [Here](https://blockexplorer.com/api/block/00000000000000001e8d6829a8a21adc5d38d0a473b144b6765798e61f98bd1d) we can retrieve the very same block via their API. Just click on it, your browser will show the returned [JSON](https://en.wikipedia.org/wiki/JSON) struct as text. A _lot_ of text, the list of transactions `"tx":["024b...6e51"]` has 693 entries and thus makes up most of the data presented. When shorting the `"tx"` array and structuring the wall of text, we get:
