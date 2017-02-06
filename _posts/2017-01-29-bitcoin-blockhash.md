@@ -40,6 +40,11 @@ The [serialized header's](https://bitcoin.org/en/developer-reference#block-heade
 | [target](https://en.bitcoin.it/wiki/Target) [nBits](https://bitcoin.org/en/developer-reference#target-nbits) | unsigned long |  little endian |
 | nonce | unsigned long |  little endian |
 
+The `long` like data types are straight forward to handle, knowing all of them are expected as [little endian](https://en.wikipedia.org/wiki/Endianness#Little-endian). In the bitcoin world, the representation of hashes, though, takes a little getting used to. The [byte orders](https://bitcoin.org/en/developer-reference#hash-byte-order) in which hashes are represented get distinguished between:
+
+1. _Internal_ byte order is the 'normal' byte order in which any SHA-256 implementation will return its output, e.g. our Python [hashlib's](https://docs.python.org/3/library/hashlib.html) `sha256(header).digest()` call.
+2. _RPC_ byte order is the _byte-wise reverse_ of the internal order.
+
 ## Testing against the Block Chain
 
 We can test the above function against any header in the actual chain. The respective header elements we can get from any [block chain browser](https://en.bitcoin.it/wiki/Block_chain_browser), e.g. the [Blockexplorer](https://blockexplorer.com) website. The main site always shows the most recent block, right now, this is block [#447569](https://blockexplorer.com/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac).
