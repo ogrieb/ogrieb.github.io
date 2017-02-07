@@ -12,7 +12,7 @@ published: true
 
 The block hash defines the chain links among the block chain, as every block contains a hash of the previous block. For more contextual information I recommend the wiki's [block chain article](https://en.bitcoin.it/wiki/Block_chain) and the developer guide's [block chain section](https://bitcoin.org/en/developer-guide#block-chain).
 
-In this post, I want to take a look at the block hashing algorithm, its input, a serialized block header, as well as the output, a block hash.
+In this post, I want to take a look at the block hashing algorithm, in particular its input, a serialized block header.
 
 ## The Bitcoin Block Hashing Algorithm
 
@@ -40,10 +40,17 @@ The [serialized header's](https://bitcoin.org/en/developer-reference#block-heade
 | [target](https://en.bitcoin.it/wiki/Target) [nBits](https://bitcoin.org/en/developer-reference#target-nbits) | unsigned long |  little endian |
 | nonce | unsigned long |  little endian |
 
-The `long` like data types are straight forward to handle, knowing all of them are expected as [little endian](https://en.wikipedia.org/wiki/Endianness#Little-endian). In the bitcoin world, the representation of hashes, though, takes a little getting used to. The [byte orders](https://bitcoin.org/en/developer-reference#hash-byte-order) in which hashes are represented get distinguished between:
+The `long` like data types are straight forward to handle, knowing all of them are expected as [little endian](https://en.wikipedia.org/wiki/Endianness#Little-endian). The hash character arrays in C, respectively byte arrays in Python, would not even be affected by endianness (for an explanation, read the section "When endianness affects code", [here](https://www.ibm.com/developerworks/aix/library/au-endianc/)). Thus, they could be easily serialized, too, were it not for the curious representation of hashes in the bitcoin world... here, two [byte orders](https://bitcoin.org/en/developer-reference#hash-byte-order) are distinguished between:
 
-1. _Internal_ byte order is the 'normal' byte order in which any SHA-256 implementation will return its output, e.g. our Python [hashlib's](https://docs.python.org/3/library/hashlib.html) `sha256(header).digest()` call.
-2. _RPC_ byte order is the _byte-wise reverse_ of the internal order.
+1. _Internal_ byte order: the 'normal' byte order in which any SHA-256 implementation will return its output, e.g. our [hashlib](https://docs.python.org/3/library/hashlib.html) based  `blockhash()` function.
+2. _RPC_ byte order: the _byte-wise reverse_ of the internal order.
+
+In Python, conversion between the two orders can be easily realized by slicing with step `-1`.
+
+```python
+inthash = blockhash(header)
+rpchash = inthash[::-1]
+```
 
 ## Testing against the Block Chain
 
