@@ -22,6 +22,7 @@ As of now, the developer guide and reference have no dedicated sections about th
 from hashlib import sha256
 
 def blockhash(header: bytes) -> bytes:
+    """Block hash over serialized block header in internal byte order"""
     hash = sha256(header).digest()
     hash = sha256(hash).digest()
     return hash
@@ -34,22 +35,52 @@ The [serialized header's](https://bitcoin.org/en/developer-reference#block-heade
 | Field | C Data Type | Format |
 |-|-|
 | [version](https://bitcoin.org/en/developer-reference#block-versions) number | long | little endian |
-| [previous block header's hash](https://bitcoin.org/en/developer-reference#term-previous-block-header-hash) | char[32] | little endian, internal byte order |
-| [merkle root hash](https://bitcoin.org/en/glossary/merkle-root) | char[32] | little endian, internal byte order |
+| [previous block header's hash](https://bitcoin.org/en/developer-reference#term-previous-block-header-hash) | char[32] | internal byte order |
+| [merkle root hash](https://bitcoin.org/en/glossary/merkle-root) over transactions | char[32] | internal byte order |
 | [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) | unsigned long |  little endian |
 | [target](https://en.bitcoin.it/wiki/Target) [nBits](https://bitcoin.org/en/developer-reference#target-nbits) | unsigned long |  little endian |
 | nonce | unsigned long |  little endian |
 
-The `long` like data types are straight forward to handle, knowing all of them are expected as [little endian](https://en.wikipedia.org/wiki/Endianness#Little-endian). The hash character arrays in C, respectively byte arrays in Python, would not even be affected by endianness (for an explanation, read the section "When endianness affects code", [here](https://www.ibm.com/developerworks/aix/library/au-endianc/)). Thus, they could be easily serialized, too, were it not for the curious representation of hashes in the bitcoin world... here, two [byte orders](https://bitcoin.org/en/developer-reference#hash-byte-order) are distinguished between:
+The `long` like data types are simple to serialize in [little endian](https://en.wikipedia.org/wiki/Endianness#Little-endian). Serialized hash character arrays in C, respectively byte arrays in Python, are not even affected by endianness. For an explanation I refer to the section "When endianness affects code", in [this](https://www.ibm.com/developerworks/aix/library/au-endianc/) IBM developerWorks article.
 
-1. _Internal_ byte order: the 'normal' byte order in which any SHA-256 implementation will return its output, e.g. our [hashlib](https://docs.python.org/3/library/hashlib.html) based  `blockhash()` function.
-2. _RPC_ byte order: the _byte-wise reverse_ of the internal order.
 
-In Python, conversion between the two orders can be easily realized by slicing with step `-1`.
+
+Hashes in the bitcoin world, though, get represented in two different [byte orders](https://bitcoin.org/en/developer-reference#hash-byte-order):
+
+1. _Internal_ byte order: the 'normal' byte order in which any SHA-256 implementation will return its output, e.g. our [hashlib](https://docs.python.org/3/library/hashlib.html) based  `blockhash()` function. Used in serialized blocks, respectively headers.
+2. _RPC_ byte order: the _byte-wise reverse_ of the internal order, used by the Bitcoin Core’s [RPCs](https://bitcoin.org/en/developer-reference#remote-procedure-calls-rpcs).
+
+In Python, conversion between the two orders can be realized by slicing with step width `-1`.
 
 ```python
 inthash = blockhash(header)
 rpchash = inthash[::-1]
+```
+
+```python
+from struct import pack, unpack
+
+def serheadblockexp(
+        version: int,
+        prevblockhash: str,
+        merkleroot: str,
+        time: int,
+        nbits: str,
+        nonce: int) -> bytes:
+    """Serialized block header from Block Explorer API Data
+
+    Packs block header bytes from value types as returned from the Block
+    Explorer API under https://blockexplorer.com/api/block/[:hash]"""
+    return pack(
+                "< l 32s 32s L L L",
+                version,
+                # hashes need to be converted from RPC to internal byte order
+                bytes.fromhex(prevblockhash)[::-1],
+                bytes.fromhex(merkleroot)[::-1],
+                time,
+                # nBits need to be unpacked from hex string into unsigned long
+                unpack(">L", bytes.fromhex(nbits))[0],
+                nonce)
 ```
 
 ## Testing against the Block Chain
