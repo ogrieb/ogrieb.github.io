@@ -10,23 +10,9 @@ published: true
 {% include figure.html img="2017-01-22-blockchain-overview.svg"
     cap="Figure 1. [_Simplified Bitcoin Block Chain_](https://bitcoin.org/en/developer-guide#block-chain) by unknown, licensed under the [MIT license](http://opensource.org/licenses/mit-license.php). _Developer Guide_, Bitcoin Project. Accessed 22 January 2017." %}
 
-The block hash defines the chain links among the block chain, as every block contains a hash of the previous block. For more contextual information I recommend the wiki's [block chain article](https://en.bitcoin.it/wiki/Block_chain) and the developer guide's [block chain section](https://bitcoin.org/en/developer-guide#block-chain).
+The block hash defines the chain links among the block chain, as every block contains a hash of the previous block. This is visualized in Figure 1. For more contextual information I recommend the wiki's [block chain article](https://en.bitcoin.it/wiki/Block_chain) and the developer guide's [block chain section](https://bitcoin.org/en/developer-guide#block-chain).
 
-In this post, I want to take a look at the block hashing algorithm, in particular its input, a serialized block header.
-
-## The Bitcoin Block Hashing Algorithm
-
-As of now, the developer guide and reference have no dedicated sections about the block hashing algorithm. Admittedly, the computation itself is rather straight forward and well-described in the [wiki](https://en.bitcoin.it/wiki/Block_hashing_algorithm). The computation is defined as a double [SHA-256](https://en.wikipedia.org/wiki/SHA-2) [hash](https://dx.doi.org/10.6028/NIST.FIPS.180-4) over an 80 byte array, the latter being the serialized block header. We can quickly prototype this in a Python function as:
-
-```python
-from hashlib import sha256
-
-def blockhash(header: bytes) -> bytes:
-    """Block hash over serialized block header in internal byte order"""
-    hash = sha256(header).digest()
-    hash = sha256(hash).digest()
-    return hash
-```
+In this post, I want to take a look at the block hashing algorithm, its input, a serialized block header and hash byte orders.
 
 ## Input: Serialized Header
 
@@ -41,14 +27,30 @@ The [serialized header's](https://bitcoin.org/en/developer-reference#block-heade
 | [target](https://en.bitcoin.it/wiki/Target) [nBits](https://bitcoin.org/en/developer-reference#target-nbits) | unsigned long |  little endian |
 | nonce | unsigned long |  little endian |
 
-The `long` like data types are simple to serialize in [little endian](https://en.wikipedia.org/wiki/Endianness#Little-endian). Serialized hash character arrays in C, respectively byte arrays in Python, are not even affected by endianness. For an explanation I refer to the section "When endianness affects code", in [this](https://www.ibm.com/developerworks/aix/library/au-endianc/) IBM developerWorks article.
+The `long` like data types are simple to serialize in [little endian](https://en.wikipedia.org/wiki/Endianness#Little-endian). Serialized hash character arrays in C, respectively byte arrays in Python, are not affected by endianness. For an explanation I refer to the section "When endianness affects code", in [this](https://www.ibm.com/developerworks/aix/library/au-endianc/) IBM developerWorks article. We still have to get the hash byte order right.
 
+Hashes in the bitcoin world get represented in two different [byte orders](https://bitcoin.org/en/developer-reference#hash-byte-order):
 
+1. _Internal_ byte order: the 'normal' byte order in which any SHA-256 implementation will return its output is used with serialized blocks and headers. A [hashlib's](https://docs.python.org/3/library/hashlib.html) `sha256` object for example.
+2. _RPC_ byte order: the _byte-wise reverse_ of the internal order is used by the Bitcoin Core’s [RPCs](https://bitcoin.org/en/developer-reference#remote-procedure-calls-rpcs) and [block chain browsers](https://en.bitcoin.it/wiki/Block_chain_browser).
 
-Hashes in the bitcoin world, though, get represented in two different [byte orders](https://bitcoin.org/en/developer-reference#hash-byte-order):
+A block chain browser like the [Block Explorer](https://blockexplorer.com) website is the easiest way to browse some header elements from the actual block chain. Figure 2, below, shows the site for the block at height 447569. Its 'BlockHash' is presented in _RPC_ byte order.
 
-1. _Internal_ byte order: the 'normal' byte order in which any SHA-256 implementation will return its output, e.g. our [hashlib](https://docs.python.org/3/library/hashlib.html) based  `blockhash()` function. Used in serialized blocks, respectively headers.
-2. _RPC_ byte order: the _byte-wise reverse_ of the internal order, used by the Bitcoin Core’s [RPCs](https://bitcoin.org/en/developer-reference#remote-procedure-calls-rpcs).
+{% include figure.html img="2016-12-28-bitexpblock447569.jpg"
+    cap="Figure 2. [_Block #447569_](https://blockexplorer.com/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac), 11 January 2017. _Website Screenshot_, Bitcoin Block Explorer. Accessed 11 January 2017." %}
+
+The Python `bytes` object below is initialized with the serialized block header at height 447569. The hashes are in _internal_ byte order.
+
+```py
+# Serialized block header at height 447569
+serhead447569 = bytes.fromhex(
+    "00000020\
+    bb9d883e59fdb50bbe66bede526eb3741547a16467af1b000000000000000000\
+    3947840edb1a5f4e7d5be5a6a125dbbdaaf7ea12e70320661d17168c93fc5ff1\
+    017a7558\
+    79430318\
+    6053336d")
+```
 
 In Python, conversion between the two orders can be realized by slicing with step width `-1`.
 
@@ -56,6 +58,10 @@ In Python, conversion between the two orders can be realized by slicing with ste
 inthash = blockhash(header)
 rpchash = inthash[::-1]
 ```
+
+
+
+The function below serializes a block header from value types as returned from the Block Explorer [API](https://blockexplorer.com/api-ref):
 
 ```python
 from struct import pack, unpack
@@ -82,6 +88,24 @@ def serheadblockexp(
                 unpack(">L", bytes.fromhex(nbits))[0],
                 nonce)
 ```
+
+## The Bitcoin Block Hashing Algorithm
+
+As of now, the developer guide and reference have no dedicated sections about the block hashing algorithm. Admittedly, the computation itself is rather straight forward and well-described in the [wiki](https://en.bitcoin.it/wiki/Block_hashing_algorithm). The computation is defined as a double [SHA-256](https://en.wikipedia.org/wiki/SHA-2) [hash](https://dx.doi.org/10.6028/NIST.FIPS.180-4) over an 80 byte array, the latter being the serialized block header. We can quickly prototype this in a Python function as:
+
+```python
+from hashlib import sha256
+
+def blockhash(header: bytes) -> bytes:
+    """Block hash over serialized block header in internal byte order"""
+    hash = sha256(header).digest()
+    hash = sha256(hash).digest()
+    return hash
+```
+
+
+
+
 
 ## Testing against the Block Chain
 
