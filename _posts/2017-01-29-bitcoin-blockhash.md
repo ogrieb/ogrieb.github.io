@@ -12,7 +12,7 @@ published: true
 
 The block hash defines the chain links among the block chain, as every block contains a hash of the previous block. This is visualized in Figure 1. For more contextual information I recommend the wiki's [block chain article](https://en.bitcoin.it/wiki/Block_chain) and the developer guide's [block chain section](https://bitcoin.org/en/developer-guide#block-chain).
 
-In this post, I want to take a look at the block hashing algorithm, its input, a serialized block header and hash byte orders.
+In this post, I want to take a look at the block hashing algorithm, its input, a serialized block header and hash byte orders. Every topic will have some Python examples and functions to go along with.
 
 ## Input: Serialized Header
 
@@ -139,7 +139,7 @@ def blockhash(header: bytes) -> bytes:
     return hash
 ```
 
-## Test
+## Test and Python Module Gist
 
 The following code tests the above functions for block #447569 against the known hash:
 
@@ -164,4 +164,10 @@ header = serheadblockexp(
 hash = blockhash(header)
 print("Computed Hash:\n" + hash.hex())
 assert (hash == refhash), "Wrong hash!"
+```
+
+The shown Python code listings above are also available in one module licensed under the [MIT license](http://opensource.org/licenses/mit-license.php) in this [Gist](https://gist.github.com/ogrieb/a088ed32146f1703e991694143d15c3f):
+
+```url
+https://gist.github.com/ogrieb/a088ed32146f1703e991694143d15c3f
 ```
