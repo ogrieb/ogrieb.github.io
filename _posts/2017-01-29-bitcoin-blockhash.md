@@ -145,10 +145,10 @@ The following code tests the above functions for block #447569 against the known
 
 ```py
 # Test to recompute block hash #447569
-rpcrefhash = bytes.fromhex(
-    "0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac")
-intrefhash = rpcrefhash[::-1]
-print("Reference Hash:\n" + intrefhash.hex())
+refhash = bytes.fromhex(
+    "0000000000000000025f4304cbcaa71f\
+    fe257eb14e5a12303d257bed95b9c6ac")[::-1]
+print("Reference Hash:\n" + refhash.hex())
 
 # parameters taken from
 #  https://blockexplorer.com/api/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac
@@ -163,5 +163,5 @@ header = serheadblockexp(
             1832080224)
 hash = blockhash(header)
 print("Computed Hash:\n" + hash.hex())
-assert (hash == intrefhash), "Wrong hash!"
+assert (hash == refhash), "Wrong hash!"
 ```
