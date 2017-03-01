@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Bitcoin Block Hash"
-excerpt: "A technical introduction to block header serialization, hash byte orders and the block hash algorithm with Python Examples"
+excerpt: "A technical introduction to block header serialization, hash byte orders and the block hash algorithm with Python Examples."
 published: true
 ---
 
