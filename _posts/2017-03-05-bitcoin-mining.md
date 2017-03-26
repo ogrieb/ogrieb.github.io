@@ -3,7 +3,6 @@ layout: default
 title: "Bitcoin Mining"
 excerpt: "A technical introduction to the general bitcoin mining algorithm, with Python examples."
 published: true
-mathjax_enabled: true
 ---
 
 # Bitcoin Mining
