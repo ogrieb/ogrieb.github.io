@@ -17,6 +17,8 @@ From the perspective of the peers in the [bitcoin](https://bitcoin.org/en/develo
 
 bla \\\\( n+1 \\\\) blub
 
+$$a^2 + b^2 = c^2$$
+
 Given the block hash of the currently highest block _n_ in the chain, the merkle root _n+1_ defined over the new transactions to be included by the respective nodes _1..j_, then each of the miners _1..i_ attempts to find a new block header _n+1_ over which the corresponding block hash in _RPC_ byte order, considered as a big-endian number, is lower than or equal to the current [target threshold](https://bitcoin.org/en/developer-reference#target-nbits). This is visualized in Figure 1 below.
 
 {% include figure.html img="2017-03-19-mine-new-block.png"
