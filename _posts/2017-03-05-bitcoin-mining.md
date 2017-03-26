@@ -12,7 +12,7 @@ In my last [post]({{ site.url }}/2017/01/29/bitcoin-blockhash) I wrote about the
 
 From the perspective of the peers in the [bitcoin](https://bitcoin.org/en/developer-guide#p2p-network) [network](https://en.bitcoin.it/wiki/Network), miners provide a service to them. Those peers who want to perform a [transaction](https://bitcoin.org/en/developer-guide#transactions), i.e., transmit an amount of bitcoin from one peer to another, _technically_ want to have this transaction included in the transaction list of the next block. For the miners this manifests as a computational problem, which can be stated as:
 
-bla \\( n+1 \\) blub
+bla $ n+1 $ blub
 
 $$a^2 + b^2 = c^2$$
 
