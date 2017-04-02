@@ -56,7 +56,7 @@ The displayed header fields can also be retrieved in a more raw form, via the co
 https://blockexplorer.com/api/block/[:hash]
 ```
 
-The thus [returned](https://blockexplorer.com/api/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6acj) [JSON](https://en.wikipedia.org/wiki/JSON) struct contains a list of transactions with 693 entries and thus makes up most of the data. By shorting the `"tx"` array and structuring a bit, we get:
+The thus [returned](https://blockexplorer.com/api/block/0000000000000000025f4304cbcaa71ffe257eb14e5a12303d257bed95b9c6ac) [JSON](https://en.wikipedia.org/wiki/JSON) struct contains a list of transactions with 693 entries and thus makes up most of the data. By shorting the `"tx"` array and structuring a bit, we get:
 
 ```json
 {
