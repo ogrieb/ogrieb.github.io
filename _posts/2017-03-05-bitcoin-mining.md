@@ -3,8 +3,10 @@ layout: default
 title: "Bitcoin Mining"
 excerpt: "A technical introduction to the general bitcoin mining algorithm, with Python examples."
 published: true
-mathjax_enabled: true
+mathjax_enabled: false
 ---
+
+{% include mathjax.html %}
 
 # Bitcoin Mining
 
@@ -22,4 +24,4 @@ This is visualized in Figure 1 below.
 {% include figure.html img="2017-03-19-mine-new-block.png"
     cap="Figure 1. Mining a new block." %}
 
-This procedure is not a computation distributed among the miners, but a _competitive_ one. Meaning, the first miner to find a solution for the current problem produces the newest block and thus gets to keep all the transaction fees as well as the [coinbase transaction](https://bitcoin.org/en/developer-reference#term-coinbase-tx).
+This procedure is not a computation distributed among the miners, but a _competitive_ one. Meaning, the first miner to find a solution for the current problem produces the newest block, thus gets to keep all the transaction fees, as well as the [coinbase transaction](https://bitcoin.org/en/developer-reference#term-coinbase-tx).
