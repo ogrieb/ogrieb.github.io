@@ -1,9 +1,12 @@
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
+        {% comment %} Enable $...$ in-line delimiters and escaping of dollar
+        sign in normal text with \$, similar to real LaTeX. {% endcomment %}
         tex2jax: {
             inlineMath: [['$','$'], ['\(', '\)']],
             processEscapes: true}});
 </script>
 <script type="text/javascript" async
+    {% comment %} Configure for TeX/LaTeX input only. {% endcomment %}
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
 </script>
